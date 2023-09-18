@@ -1,48 +1,73 @@
 import { useState } from "react";
 import { Form } from "../lib/ui.js";
-import FilledButton from "./FilledButton.js";
-import OutlineButton from "./OutlineButton.js";
+import { Modal } from "react-bootstrap";
+import ButtonContact from "@/components/ButtonContact";
 
-const Modal = ({title, type}) => {
+const ContactModal = ({ title, type, onClick, newContact }) => {
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [address, setAddress] = useState();
 
-  //if type add, o remove mostrar los diferentes botones
-  //que anda la cruz
+  useEffect(() => {
+    //Verificar con ENS Resolver, poner max characters
+    newContact({name, email, address});
+  }, [onClick]);
 
-  const [show, setShow] = useState(false);
-
-    return(
-      <Modal show={show} backdrop="static" keyboard={false}>
+  return (
+    <Modal show animation={false} backdrop="static" keyboard={false}>
       <Modal.Header closeButton>
-        <Modal.Title>
-       {title}
-        </Modal.Title>
+        <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
       <Modal.Body className="text-dark">
-      <Form>
-        <Form.Group className="mb-3" controlId="formAddressENS">
-        <img src="/cross.svg" alt="Bootstrap" width="32" height="32"></img>
-          <Form.Label>Wallet address or ENS</Form.Label>
-          <Form.Control type="walletOrENS" placeholder="0x..." />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formEmail">
-          <Form.Label>Email</Form.Label>
-          <Form.Label>Optional</Form.Label>
-          <Form.Control type="email" placeholder="Email" />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formContactName">
-          <Form.Label>Contact name</Form.Label>
-          <Form.Control type="contactName" label="John Doe" />
-        </Form.Group>
-        {type === 1  ? <FilledButton text="Add contact"></FilledButton>
-        : <OutlineButton text="Are you sure you want to remove this contact"></OutlineButton>}
-      </Form>
+        <Form>
+          <Form.Group className="mb-3" controlId="formAddressENS">
+            <Form.Label>Wallet address or ENS</Form.Label>
+            <Form.Control
+              className="gray-color"
+              type="walletOrENS"
+              placeholder="0x..."
+              value = {address}
+              onChange = {setAddress}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formEmail">
+            <Form.Label>Email</Form.Label>
+            <Form.Label className="ms-4 text-muted fw-light">
+              Optional
+            </Form.Label>
+            <Form.Control
+              className="gray-color"
+              type="email"
+              value={email}
+              onChange = {setEmail}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formContactName">
+            <Form.Label>Contact name</Form.Label>
+            <Form.Control
+              className="gray-color"
+              type="contactName"
+              placeholder="John Doe"
+              value = {name}
+              onChange = {setName}
+
+            />
+          </Form.Group>
+          <div className="text-center">
+            {type === "new" ? (
+              <ButtonContact type="primary" text="Add contact" onClick={onClick} disabled></ButtonContact>
+            ) : (
+              <ButtonContact
+                text="Are you sure you want to remove this contact"
+                type="outline-primary"
+                onClick={onClick}
+              ></ButtonContact>
+            )}
+          </div>
+        </Form>
       </Modal.Body>
     </Modal>
-  
-    );
+  );
+};
 
-
-   
-}
-
-export default Modal;
+export default ContactModal;

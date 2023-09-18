@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Col, Row, Container, Button } from "../lib/ui.js";
 
-const SingleContact = () => {
+const ContactInfo = () => {
   return (
     <Container>
       <Col>
@@ -19,4 +19,4 @@ const SingleContact = () => {
   );
 };
 
-export default SingleContact;
+export default ContactInfo;
