@@ -102,9 +102,11 @@ const DisplayContacts = () => {
 
   const basicSearchContacts = () => {
     const aux = contacts.slice();
-    const filtered = aux.filter((contact) => 
-    contact.name.includes(searchWord) ||  contact.address === searchWord);
-    debugger
+    const filtered = aux.filter(
+      (contact) =>
+        contact.name.toLowerCase().includes(searchWord.toLowerCase()) || contact.address === searchWord
+    );
+    debugger;
     setSearchContacts(filtered);
   };
 
@@ -115,48 +117,51 @@ const DisplayContacts = () => {
         <Row>
           <p className="fw-bold mt-2 mb-4 ">All contacts ({contacts.length})</p>
         </Row>
-        {contacts ? (
-          (searchContacts?.length > 0 && searchWord ? searchContacts : contacts).map((contact) => {
-            return (
-              <React.Fragment key={contact.address}>
-                <Row className="text-left fw-bold ms-auto">
-                  <Col className="ps-0" xs={6}>
-                    {contact.name}
-                  </Col>
-                  <Col className="d-flex justify-content-end pe-3 pb-2" xs={6}>
-                    <img
-                      id={contact.address}
-                      src="/threeDot.svg"
-                      alt="Bootstrap"
-                      width="15"
-                      height="15"
-                      onClick={() => setShowToast(contact.address)}
-                    ></img>
-                    {showToast === contact.address && (
-                      <ToastOptions
-                        copyAddressClick={setCopyAddressClick}
-                        editContactClick={setEditContactClick}
-                        removeContactClick={setRemoveContactClick}
-                        contactKey={setContactKey}
-                        keyClicked={contact.address}
-                      ></ToastOptions>
-                    )}
-                    {showTooltip && contactKey === contact.address && (
-                      <TooltipCopy showTooltip={setShowTooltip}></TooltipCopy>
-                    )}
-                  </Col>
-                </Row>
-                <Row>
-                  <p className="fw-light">{sliceAddress(contact.address)}</p>
-                </Row>
-              </React.Fragment>
-            );
-          })
-        ) : (
+        {(searchContacts?.length >= 0 && searchWord
+          ? searchContacts
+          : contacts
+        ).map((contact) => {
+          return (
+            <React.Fragment key={contact.address}>
+              <Row className="text-left fw-bold ms-auto">
+                <Col className="ps-0" xs={6}>
+                  {contact.name}
+                </Col>
+                <Col className="d-flex justify-content-end pe-3 pb-2" xs={6}>
+                  <img
+                    id={contact.address}
+                    src="/threeDot.svg"
+                    alt="Bootstrap"
+                    width="15"
+                    height="15"
+                    onClick={() => setShowToast(contact.address)}
+                  ></img>
+                  {showToast === contact.address && (
+                    <ToastOptions
+                      copyAddressClick={setCopyAddressClick}
+                      editContactClick={setEditContactClick}
+                      removeContactClick={setRemoveContactClick}
+                      contactKey={setContactKey}
+                      keyClicked={contact.address}
+                    ></ToastOptions>
+                  )}
+                  {showTooltip && contactKey === contact.address && (
+                    <TooltipCopy showTooltip={setShowTooltip}></TooltipCopy>
+                  )}
+                </Col>
+              </Row>
+              <Row>
+                <p className="fw-light">{sliceAddress(contact.address)}</p>
+              </Row>
+            </React.Fragment>
+          );
+        })}
+        {searchContacts?.length === 0 && searchWord && (
           <Row className="text-center">
             <p>No results</p>
           </Row>
         )}
+
         <Row className="justify-content-center mx-3 fixed-bottom mb-4">
           <ButtonContact
             type="outline-primary"
