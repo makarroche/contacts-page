@@ -51,3 +51,10 @@ a {
   left: 0;
   z-index: 1030;
 }
+
+.toast {
+  max-width: 163px !important;
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height:30px;
+}

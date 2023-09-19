@@ -1,27 +1,22 @@
 import Button from 'react-bootstrap/Button';
-import {OverlayTrigger, Popover} from "../lib/ui.js";
+import {Row} from "../lib/ui.js";
+import { Toast, ToastContainer } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
 
-const TooltipCopy = () => {
+const TooltipCopy = ({showTooltip}) => {
+  const [show, setShow] = useState();
+
+  const handleCloseTooltip = () => {
+    setShow(false);
+    showTooltip(false);
+  }
 
 return (
-       <>
-  
-        <OverlayTrigger
-          trigger="click"
-          key="top"
-          placement="top"
-          overlay={
-            <Popover id={`popover-positioned-top}`}>
-              <Popover.Body>
-              Wallet address copied
-              </Popover.Body>
-            </Popover>
-          }
-        >
-          <Button variant="secondary">Popover</Button>
-        </OverlayTrigger>
-
-    </>
+  <ToastContainer className="top-start">
+    <Toast  onClose={handleCloseTooltip} show={show} delay={2000} autohide className='bg-dark text-white'>
+      <Toast.Body> <small>Wallet address copied</small></Toast.Body>
+    </Toast>
+    </ToastContainer>
   );
 };
 
