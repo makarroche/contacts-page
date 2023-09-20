@@ -4,23 +4,23 @@ import ButtonContact from "@/components/ButtonContact";
 import ContactModal from "@/components/ContactModal";
 import ToastOptions from "@/components/ToastOptions";
 import TooltipCopy from "@/components/TooltipCopy";
-import SearchBar from "./SearchBar";
+import SearchBar from "@/components/SearchBar";
 
 const DisplayContacts = () => {
   const [contacts, setContacts] = useState([]);
   const [showContactModal, setShowContactModal] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
-  const [newContact, setNewContact] = useState();
-  const [editContact, setEditContact] = useState();
-  const [removedContact, setRemovedContact] = useState();
-  const [contactInfo, setContactInfo] = useState();
-  const [copyAddressClick, setCopyAddressClick] = useState();
-  const [editContactClick, setEditContactClick] = useState();
-  const [removeContactClick, setRemoveContactClick] = useState();
-  const [contactKey, setContactKey] = useState();
-  const [searchContacts, setSearchContacts] = useState();
-  const [searchWord, setSearchWord] = useState();
+  const [newContact, setNewContact] = useState("");
+  const [editContact, setEditContact] = useState("");
+  const [removedContact, setRemovedContact] = useState("");
+  const [contactInfo, setContactInfo] = useState("");
+  const [copyAddressClick, setCopyAddressClick] = useState(false);
+  const [editContactClick, setEditContactClick] = useState(false);
+  const [removeContactClick, setRemoveContactClick] = useState(false);
+  const [contactKey, setContactKey] = useState("");
+  const [searchContacts, setSearchContacts] = useState("");
+  const [searchWord, setSearchWord] = useState("");
 
   useEffect(() => {
     if (newContact) handleAddContact();

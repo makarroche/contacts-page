@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import validator from "validator";
 import { Form } from "../lib/ui.js";
-import { useEnsResolver } from 'wagmi'
 import { Col, Modal, Row } from "react-bootstrap";
-import ButtonContact from "@/components/ButtonContact";
 import { isAddress } from "ethers";
+import { useEnsResolver } from 'wagmi'
+import validator from "validator";
+import ButtonContact from "@/components/ButtonContact";
+
 
 const ContactModal = ({
   title,
@@ -14,7 +15,7 @@ const ContactModal = ({
   oldContact,
   removedContact,
 }) => {
-  const [name, setName] = useState();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [disabled, setDisabled] = useState(true);
