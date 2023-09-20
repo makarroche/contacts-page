@@ -106,7 +106,6 @@ const DisplayContacts = () => {
       (contact) =>
         contact.name.toLowerCase().includes(searchWord.toLowerCase()) || contact.address === searchWord
     );
-    debugger;
     setSearchContacts(filtered);
   };
 

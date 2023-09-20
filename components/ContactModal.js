@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useEnsResolver } from "wagmi";
 import validator from "validator";
 import { Form } from "../lib/ui.js";
+import { useEnsResolver } from 'wagmi'
 import { Col, Modal, Row } from "react-bootstrap";
 import ButtonContact from "@/components/ButtonContact";
 import { isAddress } from "ethers";
@@ -18,8 +18,11 @@ const ContactModal = ({
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [disabled, setDisabled] = useState(true);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(false);
   const [show, setShow] = useState(true);
+  const { data, isError, isLoading } = useEnsResolver({
+    name: `${address}`,
+  })
 
   useEffect(() => {
     if (name || address) setDisabled(name && address ? false : true);
@@ -34,11 +37,12 @@ const ContactModal = ({
   }, [oldContact]);
 
   const handleAddContact = () => {
-    validateForm ? newContact({ name, email, address }) : setError("Error");
+    setError(false);
+    validateForm() ? newContact({ name, email, address }) : '';
   };
 
   const handleEditContact = () => {
-    validateForm ? newContact({ name, email, address }) : setError("Error");
+    validateForm ? newContact({ name, email, address }) : '';
   };
 
   const handleRemoveContact = () => {
@@ -46,26 +50,45 @@ const ContactModal = ({
   };
 
   const validateForm = () => {
-    return isEmailValid && isAddressOrENSValid;
+    return isEmailValid() && isAddressOrENSValid();
   };
 
   const isEmailValid = () => {
-    return validator.isEmail(email);
+    if(validator.isEmail(email)){
+      return true;
+    }
+    else{
+      setError("Invalid Email!");
+      return false
+    }
   };
 
   const isAddressOrENSValid = () => {
-    //check address not repeats
     if (address.length === 42) {
-      return isAddress(address);
+      if(!isAddress(address)){
+        setError("Invalid Address!");
+        return false;
+      }
+      else{
+        return true;
+      }
     } else {
-      const { data, isError, isLoading } = useEnsResolver({
-        name: address,
-      });
-      if (isLoading) return <div>Fetching resolver…</div>;
-      if (isError) return <div>Error fetching resolver</div>;
-      console.log(Resolver, JSON.stringify(data));
+      resolverENS();
     }
   };
+
+  const resolverENS = async () => {
+    if (isLoading) return <div>Fetching resolver…</div>
+    if (isError){
+      setError('Invalid ENS');
+      return false;
+    }
+    else{
+      setAddress(data);
+      debugger
+      return true;
+    }
+  }
 
   const handleClose = () => {
     showContactModal(false);
@@ -94,6 +117,7 @@ const ContactModal = ({
               <>
                 <Form.Group className="mb-3" controlId="formAddressENS">
                   <Form.Label>Wallet address or ENS</Form.Label>
+                  {error && <Form.Label className="text-danger fw-bold ms-2">{error}</Form.Label>}
                   <Form.Control
                     className="gray-color"
                     type="walletOrENS"
