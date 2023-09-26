@@ -86,7 +86,6 @@ const ContactModal = ({
     }
     else{
       setAddress(data);
-      debugger
       return true;
     }
   }
