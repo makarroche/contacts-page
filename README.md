@@ -1,4 +1,4 @@
-This is a next.js + react boostrap + wagmi + ethers project for a Contacts page.
+This is a next.js + react boostrap + wagmi + ethers project for CRUD operations for Contacts page. 
 
 ## Clone Repository
 ## Execute yarn to install dependencies 
