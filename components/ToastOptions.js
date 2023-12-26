@@ -1,20 +1,17 @@
 import { Toast, ToastContainer, Row } from "react-bootstrap";
 
-const ToastOptions = ({copyAddressClick, editContactClick, removeContactClick, contactKey, keyClicked}) => {
+const ToastOptions = ({copyAddressClick, editContactClick, removeContactClick}) => {
   
   const handleCopyAddressClick = () => {
     copyAddressClick(true);
-    contactKey(keyClicked);
   }
 
   const handleEditContactClick = () => {
     editContactClick(true);
-    contactKey(keyClicked);
   }
 
   const handleRemoveContactClick = () => {
     removeContactClick(true);
-    contactKey(keyClicked);
   }
 
   return (

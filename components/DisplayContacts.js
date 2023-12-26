@@ -1,4 +1,4 @@
-import {useEffect, useState } from "react";
+import React, {useEffect, useState } from "react";
 import {Col, Container, Row} from "react-bootstrap";
 import ButtonContact from "@/components/ButtonContact";
 import ContactModal from "@/components/ContactModal";
@@ -109,6 +109,11 @@ const DisplayContacts = () => {
     setSearchContacts(filtered);
   };
 
+  const handleClickThreeDots = (contactAddress) => {
+    setShowToast(!showToast);
+    setContactKey(contactAddress);
+  }
+
   return (
     <>
       <SearchBar searchWord={setSearchWord}></SearchBar>
@@ -133,15 +138,13 @@ const DisplayContacts = () => {
                     alt="Bootstrap"
                     width="15"
                     height="15"
-                    onClick={() => setShowToast(contact.address)}
+                    onClick={() => handleClickThreeDots(contact.address)}
                   ></img>
-                  {showToast === contact.address && (
+                  {showToast && contactKey === contact.address && (
                     <ToastOptions
                       copyAddressClick={setCopyAddressClick}
                       editContactClick={setEditContactClick}
                       removeContactClick={setRemoveContactClick}
-                      contactKey={setContactKey}
-                      keyClicked={contact.address}
                     ></ToastOptions>
                   )}
                   {showTooltip && contactKey === contact.address && (
