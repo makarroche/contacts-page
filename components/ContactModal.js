@@ -14,19 +14,18 @@ const ContactModal = ({
   oldContact,
   removedContact,
 }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [address, setAddress] = useState("");
+
+  const [contact, setContact] = useState({name: "", email: "", address: ""})
   const [disabled, setDisabled] = useState(true);
   const [error, setError] = useState(false);
   const [show, setShow] = useState(true);
   const { data, isError, isLoading } = useEnsResolver({
-    name: `${address}`,
+    name: `${contact.address}`,
   })
 
   useEffect(() => {
-    if (name || address) setDisabled(name && address ? false : true);
-  }, [name, email, address]);
+    if (contact.name || contact.address) setDisabled(contact.name && contact.address ? false : true);
+  }, [contact.name, contact.email, contact.address]);
 
   useEffect(() => {
     if (type === "edit" && oldContact) {
@@ -37,12 +36,12 @@ const ContactModal = ({
   }, [oldContact]);
 
   const handleAddContact = () => {
-    setError(false);
-    validateForm() ? newContact({ name, email, address }) : '';
+    setError(false);     
+    validateForm() ? newContact(contact) : '';
   };
 
   const handleEditContact = () => {
-    validateForm ? newContact({ name, email, address }) : '';
+    validateForm ? newContact(contact) : '';
   };
 
   const handleRemoveContact = () => {
@@ -54,7 +53,7 @@ const ContactModal = ({
   };
 
   const isEmailValid = () => {
-    if(validator.isEmail(email)){
+    if(validator.isEmail(contact.email)){
       return true;
     }
     else{
@@ -64,8 +63,8 @@ const ContactModal = ({
   };
 
   const isAddressOrENSValid = () => {
-    if (address.length === 42) {
-      if(!isAddress(address)){
+    if (contact.address.length === 42) {
+      if(!isAddress(contact.address)){
         setError("Invalid Address!");
         return false;
       }
@@ -122,8 +121,8 @@ const ContactModal = ({
                     type="walletOrENS"
                     placeholder={"0x..."}
                     maxLength="42"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
+                    value={contact.address}
+                    onChange={(e) => setContact({...contact, address: e.target.value})}
                   />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formEmail">
@@ -144,8 +143,8 @@ const ContactModal = ({
                     maxLength="30"
                     type="email"
                     placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={contact.email}    
+                    onChange={(e) => setContact({...contact, email: e.target.value})}
                   />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formContactName">
@@ -155,8 +154,8 @@ const ContactModal = ({
                     type="contactName"
                     placeholder="John Doe"
                     maxLength="20"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    value={contact.name}   
+                    onChange={(e) => setContact({...contact, name: e.target.value})}
                   />
                 </Form.Group>
               </>
