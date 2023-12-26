@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { Form, InputGroup} from "../lib/ui.js";
-import { Container, Row} from "react-bootstrap";
+import { Container, Row, Form, InputGroup} from "react-bootstrap";
 
 const SearchBar = ({searchWord}) => {
 

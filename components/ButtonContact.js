@@ -1,4 +1,5 @@
-import {Button} from "../lib/ui.js";
+import { Button } from "react-bootstrap";
+
 
 
 const ButtonContact = ({type, text, onClick, disabled}) => {

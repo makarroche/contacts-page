@@ -1,6 +1,4 @@
-import { useState, useRef } from "react";
-import { Toast, ToastContainer } from "react-bootstrap";
-import { Row } from "../lib/ui.js";
+import { Toast, ToastContainer, Row } from "react-bootstrap";
 
 const ToastOptions = ({copyAddressClick, editContactClick, removeContactClick, contactKey, keyClicked}) => {
   

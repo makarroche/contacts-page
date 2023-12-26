@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { Form } from "../lib/ui.js";
-import { Col, Modal, Row } from "react-bootstrap";
+import { Col, Modal, Row, Form } from "react-bootstrap";
 import { isAddress } from "ethers";
 import { useEnsResolver } from 'wagmi'
 import validator from "validator";

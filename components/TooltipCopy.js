@@ -1,7 +1,5 @@
-import Button from 'react-bootstrap/Button';
-import {Row} from "../lib/ui.js";
 import { Toast, ToastContainer } from 'react-bootstrap';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const TooltipCopy = ({showTooltip}) => {
   const [show, setShow] = useState();

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Col, Container, Row, Tooltip } from "react-bootstrap";
+import {useEffect, useState } from "react";
+import {Col, Container, Row} from "react-bootstrap";
 import ButtonContact from "@/components/ButtonContact";
 import ContactModal from "@/components/ContactModal";
 import ToastOptions from "@/components/ToastOptions";
