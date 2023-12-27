@@ -61,7 +61,6 @@ const ContactModal = ({
 
   const isEmailValid = () => {
     if(validator.isEmail(contact.email)){
-      debugger
       return true;
     }
     else{
@@ -90,9 +89,14 @@ const ContactModal = ({
       setError('Invalid ENS');
       return false;
     }
-    else{
-      setContact({...contact, address: data});
-      return true;
+    else if (data){
+      if(data==="0x0000000000000000000000000000000000000000"){
+        setError('Invalid ENS');
+      }
+      else {
+        setContact({...contact, address: data});
+        return true;
+      }
     }
   }
 
