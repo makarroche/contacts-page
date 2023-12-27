@@ -7,10 +7,9 @@ import ButtonContact from "@/components/ButtonContact";
 
 
 const ContactModal = ({
-  title,
   type,
-  newContact,
   showContactModal,
+  newContact,
   oldContact,
   removedContact,
 }) => {
@@ -28,24 +27,27 @@ const ContactModal = ({
   }, [contact.name, contact.email, contact.address]);
 
   useEffect(() => {
-    if (type === "edit" && oldContact) {
-      setAddress(oldContact?.address);
-      setName(oldContact?.name);
-      setEmail(oldContact?.email);
+    if (type === "Edit" && oldContact) {
+      setContact({address: oldContact?.address, name: oldContact?.name, email: oldContact?.email});
     }
   }, [oldContact]);
 
   const handleAddContact = () => {
     setError(false);     
     validateForm() ? newContact(contact) : '';
+    showContactModal(false);
   };
 
   const handleEditContact = () => {
     validateForm ? newContact(contact) : '';
+    showContactModal(false);
+    setShow(false);
   };
 
   const handleRemoveContact = () => {
     removedContact(true);
+    showContactModal(false);
+    setShow(false);
   };
 
   const validateForm = () => {
@@ -89,8 +91,8 @@ const ContactModal = ({
   }
 
   const handleClose = () => {
-    showContactModal(false);
-    setShow(false);
+      showContactModal(false);
+      setShow(false);
   };
 
   return (
@@ -103,15 +105,15 @@ const ContactModal = ({
     >
       <Modal.Dialog>
         <Modal.Header closeButton>
-          <Modal.Title className={type === "remove" ? "text-center" : ""}>
-            {type === "remove"
+          <Modal.Title className={type === "Remove" ? "text-center" : ""}>
+            {type === "Remove"
               ? "Are you sure you want to remove this contact"
-              : title}
+              : `${type} Contact`}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="text-dark">
           <Form>
-            {type != "remove" && (
+            {type != "Remove" && (
               <>
                 <Form.Group className="mb-3" controlId="formAddressENS">
                   <Form.Label>Wallet address or ENS</Form.Label>
@@ -161,14 +163,14 @@ const ContactModal = ({
               </>
             )}
             <div className="text-center">
-              {type === "new" ? (
+              {type === "New" ? (
                 <ButtonContact
                   type="primary"
                   text="Add contact"
                   onClick={handleAddContact}
                   disabled={disabled}
                 ></ButtonContact>
-              ) : type === "remove" ? (
+              ) : type === "Remove" ? (
                 <ButtonContact
                   text="Yes, remove contact"
                   type="outline-danger"

@@ -12,12 +12,10 @@ const DisplayContacts = () => {
   const [showToast, setShowToast] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const [newContact, setNewContact] = useState("");
+  const [contactOldInfo, setContactOldInfo] = useState("");
   const [editContact, setEditContact] = useState("");
   const [removedContact, setRemovedContact] = useState("");
-  const [contactInfo, setContactInfo] = useState("");
-  const [copyAddressClick, setCopyAddressClick] = useState(false);
-  const [editContactClick, setEditContactClick] = useState(false);
-  const [removeContactClick, setRemoveContactClick] = useState(false);
+  const [threeDotAction, setThreeDotAction] = useState("");
   const [contactKey, setContactKey] = useState("");
   const [searchContacts, setSearchContacts] = useState("");
   const [searchWord, setSearchWord] = useState("");
@@ -25,10 +23,6 @@ const DisplayContacts = () => {
   useEffect(() => {
     if (newContact) handleAddContact();
   }, [newContact]);
-
-  useEffect(() => {
-    if (copyAddressClick) handleCopyAddress();
-  }, [copyAddressClick]);
 
   useEffect(() => {
     if (editContact) handleEditContact();
@@ -39,13 +33,23 @@ const DisplayContacts = () => {
   }, [removedContact]);
 
   useEffect(() => {
+    if(threeDotAction==="Edit"){
     const oldContact = findContact(contactKey);
-    setContactInfo(oldContact);
-  }, [editContactClick]);
+    setContactOldInfo(oldContact);
+    }
+    if(threeDotAction==="Copy"){
+      handleCopyAddress();
+    }
+  }, [threeDotAction]);
 
   useEffect(() => {
     basicSearchContacts();
   }, [searchWord]);
+
+  const handleClickThreeDots = (contactAddress) => {
+    setShowToast(!showToast);
+    setContactKey(contactAddress);
+  }
 
   const handleAddContact = () => {
     setContacts([...contacts, newContact]);
@@ -64,9 +68,8 @@ const DisplayContacts = () => {
       (contact) => contact.address === contactKey
     ).address;
     if (address) navigator.clipboard.writeText(address);
-    setShowToast(false);
     setShowTooltip(true);
-    setCopyAddressClick(false);
+    setThreeDotAction('');
   };
 
   const handleEditContact = () => {
@@ -83,7 +86,7 @@ const DisplayContacts = () => {
     );
     setContacts(aux);
     setShowToast(false);
-    setEditContactClick(false);
+    setThreeDotAction('');
   };
 
   const handleRemoveContact = () => {
@@ -91,7 +94,6 @@ const DisplayContacts = () => {
     const removed = aux.filter((contact) => contact.address != contactKey);
     setContacts(removed);
     setShowToast(false);
-    setRemoveContactClick(false);
     setRemovedContact(false);
   };
 
@@ -109,10 +111,7 @@ const DisplayContacts = () => {
     setSearchContacts(filtered);
   };
 
-  const handleClickThreeDots = (contactAddress) => {
-    setShowToast(!showToast);
-    setContactKey(contactAddress);
-  }
+ 
 
   return (
     <>
@@ -142,9 +141,9 @@ const DisplayContacts = () => {
                   ></img>
                   {showToast && contactKey === contact.address && (
                     <ToastOptions
-                      copyAddressClick={setCopyAddressClick}
-                      editContactClick={setEditContactClick}
-                      removeContactClick={setRemoveContactClick}
+                      setThreeDotAction={setThreeDotAction}
+                      setShowToast={setShowToast}
+                      setShowContactModal={setShowContactModal}
                     ></ToastOptions>
                   )}
                   {showTooltip && contactKey === contact.address && (
@@ -174,24 +173,22 @@ const DisplayContacts = () => {
         </Row>
         {showContactModal && (
           <ContactModal
-            title="New contact"
-            type="new"
+            type="New"
+            showContactModal={setShowContactModal}
             newContact={setNewContact}
-            showContactModal={setShowContactModal}
           ></ContactModal>
         )}
-        {editContactClick && (
+        {threeDotAction === "Edit" &&(
           <ContactModal
-            title="Edit contact"
-            type="edit"
+            type="Edit"
+            showContactModal={setShowContactModal}
             newContact={setEditContact}
-            showContactModal={setShowContactModal}
-            oldContact={contactInfo}
+            oldContact={contactOldInfo}
           ></ContactModal>
         )}
-        {removeContactClick && (
+        {threeDotAction === "Remove" &&(
           <ContactModal
-            type="remove"
+            type="Remove"
             showContactModal={setShowContactModal}
             removedContact={setRemovedContact}
           ></ContactModal>

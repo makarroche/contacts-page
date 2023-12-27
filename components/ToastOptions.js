@@ -1,17 +1,10 @@
 import { Toast, ToastContainer, Row } from "react-bootstrap";
 
-const ToastOptions = ({copyAddressClick, editContactClick, removeContactClick}) => {
+const ToastOptions = ({setThreeDotAction, setShowToast}) => {
   
-  const handleCopyAddressClick = () => {
-    copyAddressClick(true);
-  }
-
-  const handleEditContactClick = () => {
-    editContactClick(true);
-  }
-
-  const handleRemoveContactClick = () => {
-    removeContactClick(true);
+  const handleActionOnClick = (action) => {
+    setThreeDotAction(action);
+    setShowToast(false);
   }
 
   return (
@@ -21,17 +14,17 @@ const ToastOptions = ({copyAddressClick, editContactClick, removeContactClick}) 
           {" "}
           <Row>
             <strong>
-              <a onClick={handleCopyAddressClick}>Copy address</a>
+              <a onClick={() => handleActionOnClick("Copy")}>Copy address</a>
             </strong>
           </Row>
           <Row>
             <strong>
-              <a onClick={handleEditContactClick}>Edit contact</a>
+              <a onClick={() => handleActionOnClick("Edit")}>Edit contact</a>
             </strong>
           </Row>
           <Row>
             <strong className="text-danger">
-              <a onClick={handleRemoveContactClick}>Remove contact</a>
+              <a onClick={() => handleActionOnClick("Remove")}>Remove contact</a>
             </strong>
           </Row>
         </Toast.Body>
