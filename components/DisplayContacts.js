@@ -57,10 +57,10 @@ const DisplayContacts = () => {
   };
 
   const sliceAddress = (address) => {
-    return address
+    return address.length > 20 ? address
       .substring(0, 5)
       .concat("...")
-      .concat(address.substring(37, address.length));
+      .concat(address.substring(37, address.length)) : address;
   };
 
   const handleCopyAddress = () => {

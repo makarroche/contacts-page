@@ -33,9 +33,9 @@ const ContactModal = ({
     }
   }, [oldContact]);
 
-  const handleAddContact = () => {
+  const handleAddContact = async () => {
     setError(false);   
-    if(validateForm()){
+    if(await validateForm()){
       newContact(contact);
       showContactModal(false);
     }
@@ -55,8 +55,8 @@ const ContactModal = ({
     setShow(false);
   };
 
-  const validateForm = () => {
-    return isEmailValid() && isAddressOrENSValid();
+  const validateForm = async() => {
+    return isEmailValid() && await isAddressOrENSValid();
   };
 
   const isEmailValid = () => {
@@ -69,7 +69,7 @@ const ContactModal = ({
     }
   };
 
-  const isAddressOrENSValid = () => {
+  const isAddressOrENSValid = async() => {
     if (contact.address.length === 42) {
       if(!isAddress(contact.address)){
         setError("Invalid Address!");
@@ -79,23 +79,27 @@ const ContactModal = ({
         return true;
       }
     } else {
-      resolverENS();
+      if(await resolverENS()){
+        return true;
+      }
+      else {
+        return false;
+      }
     }
   };
 
   const resolverENS = async () => {
     if (isLoading) return <div>Fetching resolver…</div>
     if (isError){
-      setError('Invalid ENS');
+      setError('Error loading ENS');
       return false;
     }
     else if (data){
       if(data==="0x0000000000000000000000000000000000000000"){
         setError('Invalid ENS');
+        return false;
       }
       else {
-        setContact({...contact, address: data});
-        setError('Ens Resolved');
         return true;
       }
     }
