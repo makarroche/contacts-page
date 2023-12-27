@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import DisplayContacts from "@/components/DisplayContacts";
 import { WagmiConfig, configureChains, createConfig, mainnet } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
+import { Container } from "react-bootstrap";
 
 export default function Home() {
 
@@ -21,8 +22,10 @@ export default function Home() {
   return (
     <>
       <WagmiConfig config={config}>
+        <Container id="container-desktop-view">
         <Header></Header>
         <DisplayContacts></DisplayContacts>
+        </Container>
       </WagmiConfig>
     </>
   );

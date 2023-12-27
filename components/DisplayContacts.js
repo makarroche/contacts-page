@@ -116,7 +116,7 @@ const DisplayContacts = () => {
   return (
     <>
       <SearchBar searchWord={setSearchWord}></SearchBar>
-      <Container className="h-75 d-inline-block">
+      <Container className="h-75 d-inline-block container-desktop-view">
         <Row>
           <p className="fw-bold mt-2 mb-4 text-white">All contacts ({contacts.length})</p>
         </Row>
@@ -163,7 +163,7 @@ const DisplayContacts = () => {
           </Row>
         )}
 
-        <Row className="justify-content-center mx-3 fixed-bottom mb-4">
+        <Row id ="add-new-contact-row" className="justify-content-center mx-3 fixed-bottom mb-4">
           <ButtonContact
             type="outline-secondary"
             text="Add new contact"

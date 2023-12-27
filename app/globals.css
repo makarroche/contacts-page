@@ -67,3 +67,28 @@ a {
     margin-left: 6.5%;
   }
 }
+
+@media only screen and (min-width: 768px) {
+  .contain {
+    width: 60%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  #add-new-contact {
+   width: 58%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  #add-new-contact-row {
+   justify-content: center;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  #container-desktop-view {
+   width: 60%;;
+  }
+}
+
