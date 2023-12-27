@@ -22,6 +22,7 @@ const DisplayContacts = () => {
 
   useEffect(() => {
     if (newContact) handleAddContact();
+    debugger
   }, [newContact]);
 
   useEffect(() => {
@@ -118,7 +119,7 @@ const DisplayContacts = () => {
       <SearchBar searchWord={setSearchWord}></SearchBar>
       <Container className="h-75 d-inline-block">
         <Row>
-          <p className="fw-bold mt-2 mb-4 ">All contacts ({contacts.length})</p>
+          <p className="fw-bold mt-2 mb-4 text-white">All contacts ({contacts.length})</p>
         </Row>
         {(searchContacts?.length >= 0 && searchWord
           ? searchContacts
@@ -127,7 +128,7 @@ const DisplayContacts = () => {
           return (
             <React.Fragment key={contact.address}>
               <Row className="text-left fw-bold ms-auto">
-                <Col className="ps-0" xs={6}>
+                <Col className="ps-0 text-white" xs={6}>
                   {contact.name}
                 </Col>
                 <Col className="d-flex justify-content-end pe-3 pb-2" xs={6}>
@@ -152,20 +153,20 @@ const DisplayContacts = () => {
                 </Col>
               </Row>
               <Row>
-                <p className="fw-light">{sliceAddress(contact.address)}</p>
+                <p className="fw-light text-white">{sliceAddress(contact.address)}</p>
               </Row>
             </React.Fragment>
           );
         })}
         {searchContacts?.length === 0 && searchWord && (
-          <Row className="text-center">
+          <Row className="text-center text-white">
             <p>No results</p>
           </Row>
         )}
 
         <Row className="justify-content-center mx-3 fixed-bottom mb-4">
           <ButtonContact
-            type="outline-primary"
+            type="outline-secondary"
             text="Add new contact"
             onClick={setShowContactModal}
             disabled={false}

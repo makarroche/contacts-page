@@ -2,16 +2,9 @@ html,
 body {
   overflow-x: hidden;
   height: 100%;
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: #2b5876;  
+  background: -webkit-linear-gradient(to right, #4e4376, #2b5876); 
+  background: linear-gradient(to right, #4e4376, #2b5876);
 }
 
 a {
@@ -31,9 +24,9 @@ a {
   width: 100%;
   opacity: 30%;
   margin-top: 30px;
-  border-width: 0.5px
+  border-width: 0.5px;
+  color: white;
 }
-
 
 .gray-color {
   background-color: #e9ecef !important;
@@ -50,6 +43,15 @@ a {
   bottom: 0;
   left: 0;
   z-index: 1030;
+}
+
+.modal-background {
+ background-color: #292e49;
+}
+
+.onHover:hover {
+  background-color:#818d95;
+  color:white;
 }
 
 .toast {

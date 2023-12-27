@@ -34,15 +34,19 @@ const ContactModal = ({
   }, [oldContact]);
 
   const handleAddContact = () => {
-    setError(false);     
-    validateForm() ? newContact(contact) : '';
-    showContactModal(false);
+    setError(false);   
+    if(validateForm()){
+      newContact(contact);
+      showContactModal(false);
+    }
   };
 
   const handleEditContact = () => {
-    validateForm ? newContact(contact) : '';
-    showContactModal(false);
-    setShow(false);
+    if(validateForm()){
+      newContact(contact);
+      showContactModal(false);
+      setShow(false);
+    }
   };
 
   const handleRemoveContact = () => {
@@ -57,6 +61,7 @@ const ContactModal = ({
 
   const isEmailValid = () => {
     if(validator.isEmail(contact.email)){
+      debugger
       return true;
     }
     else{
@@ -86,7 +91,7 @@ const ContactModal = ({
       return false;
     }
     else{
-      setAddress(data);
+      setContact({...contact, address: data});
       return true;
     }
   }
@@ -106,14 +111,14 @@ const ContactModal = ({
       keyboard={false}
     >
       <Modal.Dialog>
-        <Modal.Header closeButton>
-          <Modal.Title className={type === "Remove" ? "text-center" : ""}>
+        <Modal.Header className="modal-background" closeButton>
+          <Modal.Title className={type === "Remove" ? "text-center text-white" : "text-white"}>
             {type === "Remove"
               ? "Are you sure you want to remove this contact"
               : `${type} Contact`}
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body className="text-dark">
+        <Modal.Body className="text-white modal-background">
           <Form>
             {type != "Remove" && (
               <>
@@ -138,7 +143,7 @@ const ContactModal = ({
                       xs={6}
                       md={4}
                       id = "optional"
-                      className="text-muted fw-light d-flex justify-content-end"
+                      className="text-white fw-light d-flex justify-content-end"
                     >
                       Optional
                     </Col>
@@ -168,7 +173,7 @@ const ContactModal = ({
             <div className="text-center">
               {type === "New" ? (
                 <ButtonContact
-                  type="primary"
+                  type="secondary"
                   text="Add contact"
                   onClick={handleAddContact}
                   disabled={disabled}

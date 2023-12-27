@@ -12,17 +12,17 @@ const ToastOptions = ({setThreeDotAction, setShowToast}) => {
       <Toast>
         <Toast.Body>
           {" "}
-          <Row>
+          <Row className = "onHover">
             <strong>
               <a onClick={() => handleActionOnClick("Copy")}>Copy address</a>
             </strong>
           </Row>
-          <Row>
+          <Row className = "onHover">
             <strong>
               <a onClick={() => handleActionOnClick("Edit")}>Edit contact</a>
             </strong>
           </Row>
-          <Row>
+          <Row className = "onHover">
             <strong className="text-danger">
               <a onClick={() => handleActionOnClick("Remove")}>Remove contact</a>
             </strong>
