@@ -22,7 +22,6 @@ const DisplayContacts = () => {
 
   useEffect(() => {
     if (newContact) handleAddContact();
-    debugger
   }, [newContact]);
 
   useEffect(() => {

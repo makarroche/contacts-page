@@ -95,6 +95,7 @@ const ContactModal = ({
       }
       else {
         setContact({...contact, address: data});
+        setError('Ens Resolved');
         return true;
       }
     }
@@ -191,7 +192,7 @@ const ContactModal = ({
               ) : (
                 <ButtonContact
                   text="Save edits"
-                  type="primary"
+                  type="secondary"
                   onClick={handleEditContact}
                 ></ButtonContact>
               )}
