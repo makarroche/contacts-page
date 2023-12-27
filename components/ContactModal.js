@@ -12,6 +12,7 @@ const ContactModal = ({
   newContact,
   oldContact,
   removedContact,
+  setThreeDotAction
 }) => {
 
   const [contact, setContact] = useState({name: "", email: "", address: ""})
@@ -93,6 +94,7 @@ const ContactModal = ({
   const handleClose = () => {
       showContactModal(false);
       setShow(false);
+      if(type !="New") setThreeDotAction('')
   };
 
   return (

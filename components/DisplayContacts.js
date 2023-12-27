@@ -183,6 +183,7 @@ const DisplayContacts = () => {
             type="Edit"
             showContactModal={setShowContactModal}
             newContact={setEditContact}
+            setThreeDotAction={setThreeDotAction}
             oldContact={contactOldInfo}
           ></ContactModal>
         )}
@@ -190,6 +191,7 @@ const DisplayContacts = () => {
           <ContactModal
             type="Remove"
             showContactModal={setShowContactModal}
+            setThreeDotAction={setThreeDotAction}
             removedContact={setRemovedContact}
           ></ContactModal>
         )}
