@@ -7,7 +7,6 @@ import { publicProvider } from "wagmi/providers/public";
 import { Container } from "react-bootstrap";
 
 export default function Home() {
-
   const { publicClient, webSocketPublicClient } = configureChains(
     [mainnet],
     [publicProvider()]
@@ -18,13 +17,13 @@ export default function Home() {
     publicClient,
     webSocketPublicClient,
   });
-  
+
   return (
     <>
       <WagmiConfig config={config}>
         <Container id="container-desktop-view">
-        <Header></Header>
-        <DisplayContacts></DisplayContacts>
+          <Header></Header>
+          <DisplayContacts></DisplayContacts>
         </Container>
       </WagmiConfig>
     </>

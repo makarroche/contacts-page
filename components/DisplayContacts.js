@@ -1,5 +1,5 @@
-import React, {useEffect, useState } from "react";
-import {Col, Container, Row} from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Col, Container, Row } from "react-bootstrap";
 import ButtonContact from "@/components/ButtonContact";
 import ContactModal from "@/components/ContactModal";
 import ToastOptions from "@/components/ToastOptions";
@@ -31,16 +31,16 @@ const DisplayContacts = () => {
 
   useEffect(() => {
     if (removedContact) {
-      handleRemoveContact()
+      handleRemoveContact();
     }
   }, [removedContact]);
 
   useEffect(() => {
-    if(threeDotAction==="Edit"){
-    const oldContact = findContact(contactKey);
-    setContactOldInfo(oldContact);
+    if (threeDotAction === "Edit") {
+      const oldContact = findContact(contactKey);
+      setContactOldInfo(oldContact);
     }
-    if(threeDotAction==="Copy"){
+    if (threeDotAction === "Copy") {
       handleCopyAddress();
     }
   }, [threeDotAction]);
@@ -52,7 +52,7 @@ const DisplayContacts = () => {
   const handleClickThreeDots = (contactAddress) => {
     setShowToast(!showToast);
     setContactKey(contactAddress);
-  }
+  };
 
   const handleAddContact = () => {
     setContacts([...contacts, newContact]);
@@ -60,10 +60,12 @@ const DisplayContacts = () => {
   };
 
   const sliceAddress = (address) => {
-    return address.length > 20 ? address
-      .substring(0, 5)
-      .concat("...")
-      .concat(address.substring(37, address.length)) : address;
+    return address.length > 20
+      ? address
+          .substring(0, 5)
+          .concat("...")
+          .concat(address.substring(37, address.length))
+      : address;
   };
 
   const handleCopyAddress = () => {
@@ -72,7 +74,7 @@ const DisplayContacts = () => {
     ).address;
     if (address) navigator.clipboard.writeText(address);
     setShowTooltip(true);
-    setThreeDotAction('');
+    setThreeDotAction("");
   };
 
   const handleEditContact = () => {
@@ -89,7 +91,7 @@ const DisplayContacts = () => {
     );
     setContacts(aux);
     setShowToast(false);
-    setThreeDotAction('');
+    setThreeDotAction("");
   };
 
   const handleRemoveContact = () => {
@@ -98,7 +100,7 @@ const DisplayContacts = () => {
     setContacts(removed);
     setShowToast(false);
     setRemovedContact(false);
-    setThreeDotAction('');
+    setThreeDotAction("");
   };
 
   const findContact = () => {
@@ -110,7 +112,8 @@ const DisplayContacts = () => {
     const aux = contacts.slice();
     const filtered = aux.filter(
       (contact) =>
-        contact.name.toLowerCase().includes(searchWord.toLowerCase()) || contact.address === searchWord
+        contact.name.toLowerCase().includes(searchWord.toLowerCase()) ||
+        contact.address === searchWord
     );
     setSearchContacts(filtered);
   };
@@ -120,55 +123,70 @@ const DisplayContacts = () => {
       <SearchBar searchWord={setSearchWord}></SearchBar>
       <Container className="h-75 d-inline-block container-desktop-view">
         <Row>
-          <p className="fw-bold mt-2 mb-4 text-white">All contacts ({contacts.length})</p>
+          <p className="fw-bold mt-2 mb-4 text-white">
+            All contacts ({contacts.length})
+          </p>
         </Row>
-        <div id="scrollableDiv" className ="threeDotPosition" style={{ height: 400, overflow: "auto" }}>
+        <div
+          id="scrollableDiv"
+          className="threeDotPosition"
+          style={{ height: 400, overflow: "auto" }}
+        >
           <InfiniteScroll
             dataLength={contacts.length}
             hasMore={true}
             scrollableTarget="scrollableDiv"
           >
-        {(searchContacts?.length >= 0 && searchWord
-          ? searchContacts
-          : contacts
-        ).map((contact) => {
-          return (
-            <React.Fragment key={contact.address}>
-              <div id="contact-background" className="rounded pt-2 ps-2 m-2">
-              <Row className="text-left fw-bold ms-auto">
-                <Col className="ps-0 text-white" xs={6}>
-                  {contact.name}
-                </Col>
-                <Col className="d-flex justify-content-end pe-3 pb-2" xs={6}>
-                  <img
-                    id={contact.address}
-                    
-                    src="/threeDot.svg"
-                    alt="Bootstrap"
-                    width="15"
-                    height="15"
-                    onClick={() => handleClickThreeDots(contact.address)}
-                  ></img>
-                  {showToast && contactKey === contact.address && (
-                    <ToastOptions
-                      setThreeDotAction={setThreeDotAction}
-                      setShowToast={setShowToast}
-                      setShowContactModal={setShowContactModal}
-                    ></ToastOptions>
-                  )}
-                  {showTooltip && contactKey === contact.address && (
-                    <TooltipCopy showTooltip={setShowTooltip}></TooltipCopy>
-                  )}
-                </Col>
-              </Row>
-              <Row>
-                <p className="fw-light text-white">{sliceAddress(contact.address)}</p>
-              </Row>
-              </div>
-            </React.Fragment>
-          );
-        })}
-        </InfiniteScroll>
+            {(searchContacts?.length >= 0 && searchWord
+              ? searchContacts
+              : contacts
+            ).map((contact) => {
+              return (
+                <React.Fragment key={contact.address}>
+                  <div
+                    id="contact-background"
+                    className="rounded pt-2 ps-2 m-2"
+                  >
+                    <Row className="text-left fw-bold ms-auto">
+                      <Col className="ps-0 text-white" xs={6}>
+                        {contact.name}
+                      </Col>
+                      <Col
+                        className="d-flex justify-content-end pe-3 pb-2"
+                        xs={6}
+                      >
+                        <img
+                          id={contact.address}
+                          src="/threeDot.svg"
+                          alt="Bootstrap"
+                          width="15"
+                          height="15"
+                          onClick={() => handleClickThreeDots(contact.address)}
+                        ></img>
+                        {showToast && contactKey === contact.address && (
+                          <ToastOptions
+                            setThreeDotAction={setThreeDotAction}
+                            setShowToast={setShowToast}
+                            setShowContactModal={setShowContactModal}
+                          ></ToastOptions>
+                        )}
+                        {showTooltip && contactKey === contact.address && (
+                          <TooltipCopy
+                            showTooltip={setShowTooltip}
+                          ></TooltipCopy>
+                        )}
+                      </Col>
+                    </Row>
+                    <Row>
+                      <p className="fw-light text-white">
+                        {sliceAddress(contact.address)}
+                      </p>
+                    </Row>
+                  </div>
+                </React.Fragment>
+              );
+            })}
+          </InfiniteScroll>
         </div>
         {searchContacts?.length === 0 && searchWord && (
           <Row className="text-center text-white">
@@ -183,7 +201,7 @@ const DisplayContacts = () => {
             contacts={contacts}
           ></ContactModal>
         )}
-        {threeDotAction === "Edit" &&(
+        {threeDotAction === "Edit" && (
           <ContactModal
             type="Edit"
             showContactModal={setShowContactModal}
@@ -192,7 +210,7 @@ const DisplayContacts = () => {
             oldContact={contactOldInfo}
           ></ContactModal>
         )}
-        {threeDotAction === "Remove" &&(
+        {threeDotAction === "Remove" && (
           <ContactModal
             type="Remove"
             showContactModal={setShowContactModal}
@@ -200,7 +218,10 @@ const DisplayContacts = () => {
             removedContact={setRemovedContact}
           ></ContactModal>
         )}
-        <Row id ="add-new-contact-row" className="justify-content-center mx-3 fixed-bottom mb-4">
+        <Row
+          id="add-new-contact-row"
+          className="justify-content-center mx-3 fixed-bottom mb-4"
+        >
           <ButtonContact
             type="outline-secondary"
             text="Add new contact"
