@@ -167,6 +167,7 @@ const DisplayContacts = () => {
             type="New"
             showContactModal={setShowContactModal}
             newContact={setNewContact}
+            contacts={contacts}
           ></ContactModal>
         )}
         {threeDotAction === "Edit" &&(
@@ -192,6 +193,7 @@ const DisplayContacts = () => {
             text="Add new contact"
             onClick={setShowContactModal}
             disabled={false}
+            setShowToast={setShowToast}
           ></ButtonContact>
         </Row>
         

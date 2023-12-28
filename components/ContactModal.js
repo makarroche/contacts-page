@@ -12,7 +12,8 @@ const ContactModal = ({
   newContact,
   oldContact,
   removedContact,
-  setThreeDotAction
+  setThreeDotAction,
+  contacts
 }) => {
 
   const [contact, setContact] = useState({name: "", email: "", address: ""})
@@ -56,7 +57,7 @@ const ContactModal = ({
   };
 
   const validateForm = async() => {
-    return isEmailValid() && await isAddressOrENSValid();
+    return isEmailValid() && await isAddressOrENSValid() && addressAlreadyExists();
   };
 
   const isEmailValid = () => {
@@ -111,6 +112,16 @@ const ContactModal = ({
       if(type !="New") setThreeDotAction('')
   };
 
+  const addressAlreadyExists = () => {
+    if(contacts.find((item) => item.address === contact.address)){
+      setError("Address already exists");
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
+
   return (
     <Modal
       show={show}
@@ -141,6 +152,7 @@ const ContactModal = ({
                     maxLength="42"
                     value={contact.address}
                     onChange={(e) => setContact({...contact, address: e.target.value})}
+                    disabled = {type === "Edit" ? true : false}
                   />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formEmail">
@@ -198,6 +210,7 @@ const ContactModal = ({
                   text="Save edits"
                   type="secondary"
                   onClick={handleEditContact}
+                  disabled={disabled}
                 ></ButtonContact>
               )}
             </div>
