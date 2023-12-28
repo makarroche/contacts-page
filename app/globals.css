@@ -55,6 +55,7 @@ a {
 
 #contact-background {
   background: rgba(138,138,220,0.5);
+  width: 96%;
 }
 
 #toast-color {
@@ -105,6 +106,12 @@ a {
 @media only screen and (min-width: 768px) {
   .modal-content {
     width:800px !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #contact-background {
+    width: 94%;
   }
 }
 

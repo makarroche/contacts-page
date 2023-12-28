@@ -134,7 +134,7 @@ const DisplayContacts = () => {
         ).map((contact) => {
           return (
             <React.Fragment key={contact.address}>
-              <div id ="contact-background" className="rounded pt-2 ps-2 m-2">
+              <div id="contact-background" className="rounded pt-2 ps-2 m-2">
               <Row className="text-left fw-bold ms-auto">
                 <Col className="ps-0 text-white" xs={6}>
                   {contact.name}
