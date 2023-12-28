@@ -122,7 +122,7 @@ const DisplayContacts = () => {
         <Row>
           <p className="fw-bold mt-2 mb-4 text-white">All contacts ({contacts.length})</p>
         </Row>
-        <div id="scrollableDiv" style={{ height: 400, overflow: "auto" }}>
+        <div id="scrollableDiv" className ="threeDotPosition" style={{ height: 400, overflow: "auto" }}>
           <InfiniteScroll
             dataLength={contacts.length}
             hasMore={true}
@@ -142,6 +142,7 @@ const DisplayContacts = () => {
                 <Col className="d-flex justify-content-end pe-3 pb-2" xs={6}>
                   <img
                     id={contact.address}
+                    
                     src="/threeDot.svg"
                     alt="Bootstrap"
                     width="15"

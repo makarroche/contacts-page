@@ -62,6 +62,15 @@ a {
   background: rgba(255,255,255,0.5);
 }
 
+.toast-container {
+ position: absolute !important; 	
+}
+
+.threeDotPosition {
+  position:relative !important;
+}
+
+
 @media only screen and (min-width: 768px) {
   #optional {
     width: 60%;
