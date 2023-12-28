@@ -9,7 +9,7 @@ const ToastOptions = ({setThreeDotAction, setShowToast}) => {
 
   return (
     <ToastContainer className="top-start mt-4">
-      <Toast>
+      <Toast id="toast-color">
         <Toast.Body>
           {" "}
           <Row className = "onHover">

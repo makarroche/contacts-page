@@ -5,6 +5,7 @@ import ContactModal from "@/components/ContactModal";
 import ToastOptions from "@/components/ToastOptions";
 import TooltipCopy from "@/components/TooltipCopy";
 import SearchBar from "@/components/SearchBar";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const DisplayContacts = () => {
   const [contacts, setContacts] = useState([]);
@@ -111,8 +112,6 @@ const DisplayContacts = () => {
     setSearchContacts(filtered);
   };
 
- 
-
   return (
     <>
       <SearchBar searchWord={setSearchWord}></SearchBar>
@@ -120,12 +119,19 @@ const DisplayContacts = () => {
         <Row>
           <p className="fw-bold mt-2 mb-4 text-white">All contacts ({contacts.length})</p>
         </Row>
+        <div id="scrollableDiv" style={{ height: 400, overflow: "auto" }}>
+          <InfiniteScroll
+            dataLength={contacts.length}
+            hasMore={true}
+            scrollableTarget="scrollableDiv"
+          >
         {(searchContacts?.length >= 0 && searchWord
           ? searchContacts
           : contacts
         ).map((contact) => {
           return (
             <React.Fragment key={contact.address}>
+              <div id ="contact-background" className="rounded pt-2 ps-2 m-2">
               <Row className="text-left fw-bold ms-auto">
                 <Col className="ps-0 text-white" xs={6}>
                   {contact.name}
@@ -154,9 +160,12 @@ const DisplayContacts = () => {
               <Row>
                 <p className="fw-light text-white">{sliceAddress(contact.address)}</p>
               </Row>
+              </div>
             </React.Fragment>
           );
         })}
+        </InfiniteScroll>
+        </div>
         {searchContacts?.length === 0 && searchWord && (
           <Row className="text-center text-white">
             <p>No results</p>
@@ -196,7 +205,6 @@ const DisplayContacts = () => {
             setShowToast={setShowToast}
           ></ButtonContact>
         </Row>
-        
       </Container>
     </>
   );

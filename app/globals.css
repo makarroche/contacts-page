@@ -38,7 +38,7 @@ a {
 }
 
 .modal-background {
- background-color: #292e49;
+ background-color: #242424;
 }
 
 .onHover:hover {
@@ -51,6 +51,14 @@ a {
   font-weight: 400;
   letter-spacing: normal;
   line-height:30px;
+}
+
+#contact-background {
+  background: rgba(138,138,220,0.5);
+}
+
+#toast-color {
+  background: rgba(255,255,255,0.5);
 }
 
 @media only screen and (min-width: 768px) {
@@ -98,4 +106,9 @@ a {
   .modal-content {
     width:800px !important;
   }
+}
+
+.form-control:focus{
+  border-color: #d7b3fa !important;
+  box-shadow: 0 0 0 0.1rem #9d3bff !important;
 }
