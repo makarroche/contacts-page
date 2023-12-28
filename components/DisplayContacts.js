@@ -162,15 +162,6 @@ const DisplayContacts = () => {
             <p>No results</p>
           </Row>
         )}
-
-        <Row id ="add-new-contact-row" className="justify-content-center mx-3 fixed-bottom mb-4">
-          <ButtonContact
-            type="outline-secondary"
-            text="Add new contact"
-            onClick={setShowContactModal}
-            disabled={false}
-          ></ButtonContact>
-        </Row>
         {showContactModal && (
           <ContactModal
             type="New"
@@ -195,6 +186,15 @@ const DisplayContacts = () => {
             removedContact={setRemovedContact}
           ></ContactModal>
         )}
+        <Row id ="add-new-contact-row" className="justify-content-center mx-3 fixed-bottom mb-4">
+          <ButtonContact
+            type="outline-secondary"
+            text="Add new contact"
+            onClick={setShowContactModal}
+            disabled={false}
+          ></ButtonContact>
+        </Row>
+        
       </Container>
     </>
   );

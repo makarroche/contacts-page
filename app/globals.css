@@ -37,14 +37,6 @@ a {
   height: 48px;
 }
 
-.modal-content {
-  position: fixed !important;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1030;
-}
-
 .modal-background {
  background-color: #292e49;
 }
@@ -76,7 +68,7 @@ a {
 
 @media only screen and (min-width: 768px) {
   #add-new-contact {
-   width: 58%;
+   width: 40%;
   }
 }
 
@@ -88,7 +80,22 @@ a {
 
 @media only screen and (min-width: 768px) {
   #container-desktop-view {
-   width: 60%;;
+   width: 40%;;
   }
 }
 
+@media only screen and (max-width: 767px) {
+  .modal-content {
+    position: fixed !important;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1030;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .modal-content {
+    width:800px !important;
+  }
+}

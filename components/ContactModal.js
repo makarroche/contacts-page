@@ -115,11 +115,11 @@ const ContactModal = ({
     <Modal
       show={show}
       onHide={handleClose}
-      animation={false}
+      animation={true}
       backdrop="static"
       keyboard={false}
+      centered
     >
-      <Modal.Dialog>
         <Modal.Header className="modal-background" closeButton>
           <Modal.Title className={type === "Remove" ? "text-center text-white" : "text-white"}>
             {type === "Remove"
@@ -203,7 +203,6 @@ const ContactModal = ({
             </div>
           </Form>
         </Modal.Body>
-      </Modal.Dialog>
     </Modal>
   );
 };
