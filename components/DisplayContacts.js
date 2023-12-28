@@ -30,7 +30,9 @@ const DisplayContacts = () => {
   }, [editContact]);
 
   useEffect(() => {
-    if (removedContact) handleRemoveContact();
+    if (removedContact) {
+      handleRemoveContact()
+    }
   }, [removedContact]);
 
   useEffect(() => {
@@ -96,6 +98,7 @@ const DisplayContacts = () => {
     setContacts(removed);
     setShowToast(false);
     setRemovedContact(false);
+    setThreeDotAction('');
   };
 
   const findContact = () => {
